@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc  
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName">
+
+
+	<!-- 默认的注解映射的支持 -->  
+	<context:component-scan base-package="com.rtmap.*.controller,com.rtmap.*.service" />
+	
+   	<mvc:annotation-driven />
+   	
+	<context:property-placeholder location="classpath:system.properties" />
+	
+	
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="ignoreAcceptHeader" value="false" />
+		<property name="defaultContentType" value="text/html" />
+		<property name="favorPathExtension" value="true" />
+		<property name="favorParameter" value="false" />  
+		<property name="mediaTypes">
+			<map>
+				<entry key="html" value="text/html" />
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />  
+			</map>
+		</property>
+
+		<property name="viewResolvers">
+			<list>
+				<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+					<property name="viewClass"
+						value="org.springframework.web.servlet.view.tiles3.TilesView" />
+					<property name="order" value="0" />
+				</bean>
+
+				<bean
+					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="viewClass"
+						value="org.springframework.web.servlet.view.JstlView" />
+					<property name="prefix" value="/WEB-INF/jsp/" />
+					<property name="suffix" value=".jsp" />
+					<property name="order" value="1" />
+				</bean>
+			</list>
+		</property>
+
+		<property name="defaultViews">
+			<list>
+				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				</bean>
+			</list>
+		</property>
+	</bean> -->
+	
+	<mvc:default-servlet-handler />
+
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
+
+ 	<!-- 拦截器 -->  
+    <mvc:interceptors> 
+        <!-- 多个拦截器,顺序执行 -->    
+        <!-- 签名拦截器 -->   
+        <mvc:interceptor>
+            <mvc:mapping path="/twobean/**"/>
+            <bean id="signInterceptor" class="com.rtmap.common.interceptor.SignInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors> 
+
+</beans>

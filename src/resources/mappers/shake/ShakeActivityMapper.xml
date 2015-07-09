@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rtmap.shake.dao.ShakeActivityMapper" >
+	
+	<select id="selectById" resultType="com.rtmap.shake.entity.ShakeActivity" parameterType="Long">
+		SELECT
+			`id`,`name`,`start_date` as startDate,`end_date` as endDate,`status`
+		FROM
+			shake_activity
+		WHERE
+			id = #{id}
+	</select>
+	<select id="selectActiveList" resultType="com.rtmap.shake.entity.ShakeActivity" parameterType="Map">
+		SELECT
+			sab.`id`,sab.`name`,sab.`start_date` as startDate,sab.`end_date` as endDate
+		FROM
+			shake_activity sab,
+			shake_activity_actor saa
+		WHERE
+			sab.`status` BETWEEN (1 AND 2)
+		AND
+			sab.id = saa.activity_id
+		AND 
+			saa.market_id = #{marketId}
+		ORDER BY
+			sab.`create_time` DESC
+		LIMIT 
+			#{page}, #{limit}
+	</select>
+	<select id="selectCurrentActList" resultType="com.rtmap.shake.entity.ShakeActivity" parameterType="Map">
+		SELECT
+			sab.`id`,sab.`name`,sab.`start_date` as startDate,sab.`end_date` as endDate , sab.status
+		FROM
+			shake_activity sab,
+			shake_activity_actor saa
+		WHERE
+			sab.id = saa.activity_id
+		AND 
+			saa.market_id = #{marketId}
+		AND
+			sab.status &lt;= #{status}
+		ORDER BY
+			sab.`create_time` DESC
+		LIMIT 
+			#{page}, #{limit}
+	</select>
+	<select id="selectHistoryActList" resultType="com.rtmap.shake.entity.ShakeActivity" parameterType="Map">
+		SELECT
+			sab.`id`,sab.`name`,sab.`start_date` as startDate,sab.`end_date` as endDate , sab.status
+		FROM
+			shake_activity sab,
+			shake_activity_actor saa
+		WHERE
+			sab.id = saa.activity_id
+		AND 
+			saa.market_id = #{marketId}
+		AND
+			sab.status = #{status}
+		ORDER BY
+			sab.`create_time` DESC
+		LIMIT 
+			#{page}, #{limit}
+	</select>
+	
+</mapper>

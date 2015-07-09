@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	
+	<!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+		
+		<Appenders>
+			<Console name="Console">
+				<PatternLayout pattern="%d %-5p [%c] (%t) %m%n" />
+			</Console>
+	
+			<RollingRandomAccessFile name="RollingRandomAccessFile"
+				immediateFlush="true" fileName="${sys:catalina.base}/logs/app.log"
+				filePattern="${sys:catalina.base}/logs/app.%d{yyyy-MM-dd}.log">
+				<PatternLayout pattern="%d %-5p [%c] (%t) %m%n" />
+				<Policies>
+					<TimeBasedTriggeringPolicy />
+				</Policies>
+			</RollingRandomAccessFile>
+			
+        
+	        <File name="PAY_FILE" fileName="${sys:catalina.base}/logs/app/pay.error.log" append="false">
+		      <Filters>
+		        <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+		      </Filters>
+		      <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss z} %-5level %class{36}.%M()/%L - %msg%xEx%n"/>
+		    </File>
+	        <File name="KECHUAN_FILE" fileName="${sys:catalina.base}/logs/app/kechuan.error.log" append="false">
+		      <Filters>
+		        <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+		      </Filters>
+		      <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss z} %-5level %class{36}.%M()/%L - %msg%xEx%n"/>
+		    </File>
+    
+		</Appenders>
+        <!-- 日志输出级别 -->
+        <Loggers>
+		    <Logger name="PAY_FILE" level="ERROR" additivity="false">
+		      <appender-ref ref="PAY_FILE"/>
+		    </Logger>
+		    <Logger name="KECHUAN_FILE" level="ERROR" additivity="false">
+		      <appender-ref ref="KECHUAN_FILE"/>
+		    </Logger>
+			<Root level="DEBUG">
+				<AppenderRef ref="Console" />
+				<AppenderRef ref="RollingRandomAccessFile" />
+			</Root>
+		</Loggers>
+	
+</Configuration>
