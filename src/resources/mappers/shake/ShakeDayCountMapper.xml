@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rtmap.shake.dao.ShakeDayCountMapper" >
+	
+	<sql id="mainColumns">
+		`id`, `activity_id` as activityId,`market_id` as marketId, `shake_pv` as shakePv, `shake_uv` as shakeUv, `click_pv` as clickPv, 
+		`click_uv` as clickUv, `count_time` as countTime, `create_time` as createTime
+	</sql>
+	
+	<insert id="insertRecord" parameterType="com.rtmap.shake.entity.ShakeDayCount" keyProperty="id">
+		insert into shake_day_count
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        id,
+	      </if>
+	      <if test="activityId != null" >
+	        activity_id,
+	      </if>
+	      <if test="marketId != null" >
+	        market_id,
+	      </if>
+	      <if test="shakePv != null" >
+	        shake_pv,
+	      </if>
+	      <if test="shakeUv != null" >
+	        shake_uv,
+	      </if>
+	      <if test="clickPv != null" >
+	        click_pv,
+	      </if>
+	      <if test="clickUv != null" >
+	        click_uv,
+	      </if>
+	      <if test="countTime != null" >
+	        count_time,
+	      </if>
+	      <if test="createTime != null" >
+	        create_time,
+	      </if>
+	    </trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        #{id},
+	      </if>
+	      <if test="activityId != null" >
+	        #{activityId},
+	      </if>
+	      <if test="marketId != null" >
+	        #{marketId},
+	      </if>
+	      <if test="shakePv != null" >
+	        #{shakePv},
+	      </if>
+	      <if test="shakeUv != null" >
+	      	#{shakeUv},
+	      </if>
+	      <if test="clickPv != null" >
+	      	#{clickPv},
+	      </if>
+	      <if test="clickUv != null" >
+	      	#{clickUv},
+	      </if>
+	      <if test="countTime != null" >
+	      	#{countTime},
+	      </if>
+	      <if test="createTime != null" >
+	        #{createTime},
+	      </if>
+	    </trim>
+	    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		  SELECT LAST_INSERT_ID() AS id
+		 </selectKey>
+	</insert>
+	
+	
+</mapper>

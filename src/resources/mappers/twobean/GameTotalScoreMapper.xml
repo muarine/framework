@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rtmap.twobean.dao.GameTotalScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.rtmap.twobean.vo.MemberGameTotalScoreVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username,score
+  </sql>
+  
+   <select id="selectMemberGameTotalScoreList" parameterType="com.rtmap.twobean.entity.MemberGameTotalScore" resultMap="BaseResultMap">
+  select mgts.id as id, mgts.score as score, m.username as username
+	from tb_member_game_total_score as mgts inner JOIN member m ON mgts.member_sid=m.sid
+	and m.src_type=0 GROUP BY mgts.member_sid order by score desc LIMIT 0,10
+  </select>
+</mapper>

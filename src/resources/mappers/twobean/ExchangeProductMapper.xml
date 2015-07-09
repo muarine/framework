@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rtmap.twobean.dao.ExchangeProductMapper" >
+  <resultMap id="BaseResultMap" type="com.rtmap.twobean.entity.ExchangeProduct" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="market_sid" property="marketSid" jdbcType="BIGINT" />
+    <result column="lave_count" property="laveCount" jdbcType="INTEGER" />
+    <result column="exchange_count" property="exchangeCount" jdbcType="INTEGER" />
+    <result column="exchange_score" property="exchangeScore" jdbcType="INTEGER" />
+    <result column="exchange_price" property="exchangePrice" jdbcType="DOUBLE" />
+    <result column="old_price" property="oldPrice" jdbcType="DOUBLE" />
+    <result column="use_condition" property="useCondition" jdbcType="VARCHAR" />
+    <result column="exchange_rule" property="exchangeRule" jdbcType="VARCHAR" />
+    <result column="product_memo" property="productMemo" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="is_logistic" property="isLogistic" jdbcType="VARCHAR" />
+    <result column="limit_condition" property="limitCondition" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="BIGINT" />
+    <result column="sn" property="sn" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, product_name, market_sid, lave_count, exchange_count, exchange_score, exchange_price, 
+    old_price, use_condition, exchange_rule, product_memo, start_time, end_time, is_logistic, 
+    limit_condition, add_time, sn, remark, img_url
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rtmap.twobean.entity.ExchangeProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from table_exchange_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="start != null &amp;&amp; pageSize != null">
+		limit #{start}, #{pageSize}
+	</if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from table_exchange_product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from table_exchange_product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rtmap.twobean.entity.ExchangeProductExample" >
+    delete from table_exchange_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rtmap.twobean.entity.ExchangeProduct" >
+    insert into table_exchange_product (id, product_name, market_sid, 
+      lave_count, exchange_count, exchange_score, 
+      exchange_price, old_price, use_condition, 
+      exchange_rule, product_memo, start_time, 
+      end_time, is_logistic, limit_condition, 
+      add_time, sn, remark, 
+      img_url)
+    values (#{id,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{marketSid,jdbcType=BIGINT}, 
+      #{laveCount,jdbcType=INTEGER}, #{exchangeCount,jdbcType=INTEGER}, #{exchangeScore,jdbcType=INTEGER}, 
+      #{exchangePrice,jdbcType=DOUBLE}, #{oldPrice,jdbcType=DOUBLE}, #{useCondition,jdbcType=VARCHAR}, 
+      #{exchangeRule,jdbcType=VARCHAR}, #{productMemo,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{isLogistic,jdbcType=VARCHAR}, #{limitCondition,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=BIGINT}, #{sn,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{imgUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rtmap.twobean.entity.ExchangeProduct" >
+    insert into table_exchange_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="marketSid != null" >
+        market_sid,
+      </if>
+      <if test="laveCount != null" >
+        lave_count,
+      </if>
+      <if test="exchangeCount != null" >
+        exchange_count,
+      </if>
+      <if test="exchangeScore != null" >
+        exchange_score,
+      </if>
+      <if test="exchangePrice != null" >
+        exchange_price,
+      </if>
+      <if test="oldPrice != null" >
+        old_price,
+      </if>
+      <if test="useCondition != null" >
+        use_condition,
+      </if>
+      <if test="exchangeRule != null" >
+        exchange_rule,
+      </if>
+      <if test="productMemo != null" >
+        product_memo,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="isLogistic != null" >
+        is_logistic,
+      </if>
+      <if test="limitCondition != null" >
+        limit_condition,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="marketSid != null" >
+        #{marketSid,jdbcType=BIGINT},
+      </if>
+      <if test="laveCount != null" >
+        #{laveCount,jdbcType=INTEGER},
+      </if>
+      <if test="exchangeCount != null" >
+        #{exchangeCount,jdbcType=INTEGER},
+      </if>
+      <if test="exchangeScore != null" >
+        #{exchangeScore,jdbcType=INTEGER},
+      </if>
+      <if test="exchangePrice != null" >
+        #{exchangePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="oldPrice != null" >
+        #{oldPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="useCondition != null" >
+        #{useCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeRule != null" >
+        #{exchangeRule,jdbcType=VARCHAR},
+      </if>
+      <if test="productMemo != null" >
+        #{productMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isLogistic != null" >
+        #{isLogistic,jdbcType=VARCHAR},
+      </if>
+      <if test="limitCondition != null" >
+        #{limitCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=BIGINT},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rtmap.twobean.entity.ExchangeProductExample" resultType="java.lang.Integer" >
+    select count(*) from table_exchange_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update table_exchange_product
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.productName != null" >
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketSid != null" >
+        market_sid = #{record.marketSid,jdbcType=BIGINT},
+      </if>
+      <if test="record.laveCount != null" >
+        lave_count = #{record.laveCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.exchangeCount != null" >
+        exchange_count = #{record.exchangeCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.exchangeScore != null" >
+        exchange_score = #{record.exchangeScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.exchangePrice != null" >
+        exchange_price = #{record.exchangePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oldPrice != null" >
+        old_price = #{record.oldPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.useCondition != null" >
+        use_condition = #{record.useCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exchangeRule != null" >
+        exchange_rule = #{record.exchangeRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productMemo != null" >
+        product_memo = #{record.productMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLogistic != null" >
+        is_logistic = #{record.isLogistic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limitCondition != null" >
+        limit_condition = #{record.limitCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        add_time = #{record.addTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.sn != null" >
+        sn = #{record.sn,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgUrl != null" >
+        img_url = #{record.imgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update table_exchange_product
+    set id = #{record.id,jdbcType=INTEGER},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      market_sid = #{record.marketSid,jdbcType=BIGINT},
+      lave_count = #{record.laveCount,jdbcType=INTEGER},
+      exchange_count = #{record.exchangeCount,jdbcType=INTEGER},
+      exchange_score = #{record.exchangeScore,jdbcType=INTEGER},
+      exchange_price = #{record.exchangePrice,jdbcType=DOUBLE},
+      old_price = #{record.oldPrice,jdbcType=DOUBLE},
+      use_condition = #{record.useCondition,jdbcType=VARCHAR},
+      exchange_rule = #{record.exchangeRule,jdbcType=VARCHAR},
+      product_memo = #{record.productMemo,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=VARCHAR},
+      end_time = #{record.endTime,jdbcType=VARCHAR},
+      is_logistic = #{record.isLogistic,jdbcType=VARCHAR},
+      limit_condition = #{record.limitCondition,jdbcType=VARCHAR},
+      add_time = #{record.addTime,jdbcType=BIGINT},
+      sn = #{record.sn,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      img_url = #{record.imgUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rtmap.twobean.entity.ExchangeProduct" >
+    update table_exchange_product
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="marketSid != null" >
+        market_sid = #{marketSid,jdbcType=BIGINT},
+      </if>
+      <if test="laveCount != null" >
+        lave_count = #{laveCount,jdbcType=INTEGER},
+      </if>
+      <if test="exchangeCount != null" >
+        exchange_count = #{exchangeCount,jdbcType=INTEGER},
+      </if>
+      <if test="exchangeScore != null" >
+        exchange_score = #{exchangeScore,jdbcType=INTEGER},
+      </if>
+      <if test="exchangePrice != null" >
+        exchange_price = #{exchangePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="oldPrice != null" >
+        old_price = #{oldPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="useCondition != null" >
+        use_condition = #{useCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeRule != null" >
+        exchange_rule = #{exchangeRule,jdbcType=VARCHAR},
+      </if>
+      <if test="productMemo != null" >
+        product_memo = #{productMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isLogistic != null" >
+        is_logistic = #{isLogistic,jdbcType=VARCHAR},
+      </if>
+      <if test="limitCondition != null" >
+        limit_condition = #{limitCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=BIGINT},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rtmap.twobean.entity.ExchangeProduct" >
+    update table_exchange_product
+    set product_name = #{productName,jdbcType=VARCHAR},
+      market_sid = #{marketSid,jdbcType=BIGINT},
+      lave_count = #{laveCount,jdbcType=INTEGER},
+      exchange_count = #{exchangeCount,jdbcType=INTEGER},
+      exchange_score = #{exchangeScore,jdbcType=INTEGER},
+      exchange_price = #{exchangePrice,jdbcType=DOUBLE},
+      old_price = #{oldPrice,jdbcType=DOUBLE},
+      use_condition = #{useCondition,jdbcType=VARCHAR},
+      exchange_rule = #{exchangeRule,jdbcType=VARCHAR},
+      product_memo = #{productMemo,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      is_logistic = #{isLogistic,jdbcType=VARCHAR},
+      limit_condition = #{limitCondition,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=BIGINT},
+      sn = #{sn,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

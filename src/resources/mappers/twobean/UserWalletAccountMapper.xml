@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rtmap.twobean.dao.UserWalletAccountMapper" >
+  <sql id="Base_Column_List" >
+    `user_id` as userId, `real_name` as realName, `phone`, `alipay_count` as alipayCount, `total_income` as totalIncome, `total_tx` as totalTx
+  </sql>
+  <select id="selectById" resultType="com.rtmap.twobean.entity.UserWalletAccount" parameterType="Long" >
+    select 
+    	<include refid="Base_Column_List"></include>
+    from 
+    	tb_user_wallet_account
+    where user_id = #{userId}
+  </select>
+  
+  <delete id="deleteById" parameterType="long" >
+    delete from tb_user_wallet_account
+    where user_id = #{userId}
+  </delete>
+  
+  <insert id="insertSelective" parameterType="com.rtmap.twobean.entity.UserWalletAccount" >
+    insert into tb_user_wallet_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="alipayCount != null" >
+        alipay_count,
+      </if>
+      <if test="totalIncome != null" >
+        total_income,
+      </if>
+      <if test="totalTx != null" >
+        total_tx,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayCount != null" >
+        #{alipayCount,jdbcType=VARCHAR},
+      </if>
+      <if test="totalIncome != null" >
+        #{totalIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="totalTx != null" >
+        #{totalTx,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+   <update id="updateByIdSelective" parameterType="com.rtmap.twobean.entity.UserWalletAccount" >
+    update tb_user_wallet_account
+    <set >
+      <if test="realName != null" >
+        real_name = #{realName},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone},
+      </if>
+      <if test="alipayCount != null" >
+        alipay_count = #{alipayCount},
+      </if>
+      <if test="totalIncome != null" >
+        total_income = #{totalIncome},
+      </if>
+      <if test="totalTx != null" >
+        total_tx = #{totalTx},
+      </if>
+    </set>
+    where user_id = #{userId}
+  </update>
+</mapper>

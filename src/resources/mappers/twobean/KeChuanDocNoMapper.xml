@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rtmap.twobean.dao.KeChuanDocNoMapper">
+  <resultMap id="BaseResultMap" type="com.rtmap.twobean.entity.KeChuanDocNo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="mallid" jdbcType="VARCHAR" property="mallid" />
+    <result column="storecode" jdbcType="VARCHAR" property="storecode" />
+    <result column="itemcode" jdbcType="VARCHAR" property="itemcode" />
+    <result column="terminal_type" jdbcType="VARCHAR" property="terminalType" />
+    <result column="txdate_yyyymmdd" jdbcType="VARCHAR" property="txdateYyyymmdd" />
+    <result column="txtime_hhmmss" jdbcType="VARCHAR" property="txtimeHhmmss" />
+    <result column="tillid" jdbcType="VARCHAR" property="tillid" />
+    <result column="txdocno" jdbcType="VARCHAR" property="txdocno" />
+    <result column="transaction_id" jdbcType="VARCHAR" property="transactionId" />
+    <result column="ttpossalestxdate_yyyymmdd" jdbcType="VARCHAR" property="ttpossalestxdateYyyymmdd" />
+    <result column="ttpossalesdocno" jdbcType="VARCHAR" property="ttpossalesdocno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, mallid, storecode, itemcode, terminal_type, txdate_yyyymmdd, txtime_hhmmss, tillid, 
+    txdocno, transaction_id, ttpossalestxdate_yyyymmdd, ttpossalesdocno
+  </sql>
+  <select id="selectByExample" parameterType="com.rtmap.twobean.entity.KeChuanDocNoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_kechuan_docno
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_kechuan_docno
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_kechuan_docno
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rtmap.twobean.entity.KeChuanDocNoExample">
+    delete from tb_kechuan_docno
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rtmap.twobean.entity.KeChuanDocNo">
+    insert into tb_kechuan_docno (id, mallid, storecode, 
+      itemcode, terminal_type, txdate_yyyymmdd, 
+      txtime_hhmmss, tillid, txdocno, 
+      transaction_id, ttpossalestxdate_yyyymmdd, 
+      ttpossalesdocno)
+    values (#{id,jdbcType=INTEGER}, #{mallid,jdbcType=VARCHAR}, #{storecode,jdbcType=VARCHAR}, 
+      #{itemcode,jdbcType=VARCHAR}, #{terminalType,jdbcType=VARCHAR}, #{txdateYyyymmdd,jdbcType=VARCHAR}, 
+      #{txtimeHhmmss,jdbcType=VARCHAR}, #{tillid,jdbcType=VARCHAR}, #{txdocno,jdbcType=VARCHAR}, 
+      #{transactionId,jdbcType=VARCHAR}, #{ttpossalestxdateYyyymmdd,jdbcType=VARCHAR}, 
+      #{ttpossalesdocno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rtmap.twobean.entity.KeChuanDocNo">
+    insert into tb_kechuan_docno
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mallid != null">
+        mallid,
+      </if>
+      <if test="storecode != null">
+        storecode,
+      </if>
+      <if test="itemcode != null">
+        itemcode,
+      </if>
+      <if test="terminalType != null">
+        terminal_type,
+      </if>
+      <if test="txdateYyyymmdd != null">
+        txdate_yyyymmdd,
+      </if>
+      <if test="txtimeHhmmss != null">
+        txtime_hhmmss,
+      </if>
+      <if test="tillid != null">
+        tillid,
+      </if>
+      <if test="txdocno != null">
+        txdocno,
+      </if>
+      <if test="transactionId != null">
+        transaction_id,
+      </if>
+      <if test="ttpossalestxdateYyyymmdd != null">
+        ttpossalestxdate_yyyymmdd,
+      </if>
+      <if test="ttpossalesdocno != null">
+        ttpossalesdocno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mallid != null">
+        #{mallid,jdbcType=VARCHAR},
+      </if>
+      <if test="storecode != null">
+        #{storecode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcode != null">
+        #{itemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalType != null">
+        #{terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="txdateYyyymmdd != null">
+        #{txdateYyyymmdd,jdbcType=VARCHAR},
+      </if>
+      <if test="txtimeHhmmss != null">
+        #{txtimeHhmmss,jdbcType=VARCHAR},
+      </if>
+      <if test="tillid != null">
+        #{tillid,jdbcType=VARCHAR},
+      </if>
+      <if test="txdocno != null">
+        #{txdocno,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null">
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="ttpossalestxdateYyyymmdd != null">
+        #{ttpossalestxdateYyyymmdd,jdbcType=VARCHAR},
+      </if>
+      <if test="ttpossalesdocno != null">
+        #{ttpossalesdocno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rtmap.twobean.entity.KeChuanDocNoExample" resultType="java.lang.Integer">
+    select count(*) from tb_kechuan_docno
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_kechuan_docno
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mallid != null">
+        mallid = #{record.mallid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storecode != null">
+        storecode = #{record.storecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemcode != null">
+        itemcode = #{record.itemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalType != null">
+        terminal_type = #{record.terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txdateYyyymmdd != null">
+        txdate_yyyymmdd = #{record.txdateYyyymmdd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txtimeHhmmss != null">
+        txtime_hhmmss = #{record.txtimeHhmmss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tillid != null">
+        tillid = #{record.tillid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txdocno != null">
+        txdocno = #{record.txdocno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transactionId != null">
+        transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ttpossalestxdateYyyymmdd != null">
+        ttpossalestxdate_yyyymmdd = #{record.ttpossalestxdateYyyymmdd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ttpossalesdocno != null">
+        ttpossalesdocno = #{record.ttpossalesdocno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_kechuan_docno
+    set id = #{record.id,jdbcType=INTEGER},
+      mallid = #{record.mallid,jdbcType=VARCHAR},
+      storecode = #{record.storecode,jdbcType=VARCHAR},
+      itemcode = #{record.itemcode,jdbcType=VARCHAR},
+      terminal_type = #{record.terminalType,jdbcType=VARCHAR},
+      txdate_yyyymmdd = #{record.txdateYyyymmdd,jdbcType=VARCHAR},
+      txtime_hhmmss = #{record.txtimeHhmmss,jdbcType=VARCHAR},
+      tillid = #{record.tillid,jdbcType=VARCHAR},
+      txdocno = #{record.txdocno,jdbcType=VARCHAR},
+      transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      ttpossalestxdate_yyyymmdd = #{record.ttpossalestxdateYyyymmdd,jdbcType=VARCHAR},
+      ttpossalesdocno = #{record.ttpossalesdocno,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rtmap.twobean.entity.KeChuanDocNo">
+    update tb_kechuan_docno
+    <set>
+      <if test="mallid != null">
+        mallid = #{mallid,jdbcType=VARCHAR},
+      </if>
+      <if test="storecode != null">
+        storecode = #{storecode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcode != null">
+        itemcode = #{itemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalType != null">
+        terminal_type = #{terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="txdateYyyymmdd != null">
+        txdate_yyyymmdd = #{txdateYyyymmdd,jdbcType=VARCHAR},
+      </if>
+      <if test="txtimeHhmmss != null">
+        txtime_hhmmss = #{txtimeHhmmss,jdbcType=VARCHAR},
+      </if>
+      <if test="tillid != null">
+        tillid = #{tillid,jdbcType=VARCHAR},
+      </if>
+      <if test="txdocno != null">
+        txdocno = #{txdocno,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null">
+        transaction_id = #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="ttpossalestxdateYyyymmdd != null">
+        ttpossalestxdate_yyyymmdd = #{ttpossalestxdateYyyymmdd,jdbcType=VARCHAR},
+      </if>
+      <if test="ttpossalesdocno != null">
+        ttpossalesdocno = #{ttpossalesdocno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rtmap.twobean.entity.KeChuanDocNo">
+    update tb_kechuan_docno
+    set mallid = #{mallid,jdbcType=VARCHAR},
+      storecode = #{storecode,jdbcType=VARCHAR},
+      itemcode = #{itemcode,jdbcType=VARCHAR},
+      terminal_type = #{terminalType,jdbcType=VARCHAR},
+      txdate_yyyymmdd = #{txdateYyyymmdd,jdbcType=VARCHAR},
+      txtime_hhmmss = #{txtimeHhmmss,jdbcType=VARCHAR},
+      tillid = #{tillid,jdbcType=VARCHAR},
+      txdocno = #{txdocno,jdbcType=VARCHAR},
+      transaction_id = #{transactionId,jdbcType=VARCHAR},
+      ttpossalestxdate_yyyymmdd = #{ttpossalestxdateYyyymmdd,jdbcType=VARCHAR},
+      ttpossalesdocno = #{ttpossalesdocno,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

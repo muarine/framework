@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rtmap.twobean.dao.MemberExchangeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.rtmap.twobean.entity.MemberExchangeRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="member_username" property="memberUsername" jdbcType="VARCHAR" />
+    <result column="member_sid" property="memberSid" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="market_sid" property="marketSid" jdbcType="BIGINT" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="consignee" property="consignee" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="shipping_address" property="shippingAddress" jdbcType="VARCHAR" />
+    <result column="transaction_status" property="transactionStatus" jdbcType="VARCHAR" />
+    <result column="exchange_time" property="exchangeTime" jdbcType="VARCHAR" />
+    <result column="write_off_time" property="writeOffTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, member_username, member_sid, product_id, market_sid, score, consignee, contact, 
+    shipping_address, transaction_status, exchange_time, write_off_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rtmap.twobean.entity.MemberExchangeRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_member_exchange_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="start != null &amp;&amp; pageSize != null">
+		limit #{start}, #{pageSize}
+	</if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_member_exchange_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_member_exchange_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rtmap.twobean.entity.MemberExchangeRecordExample" >
+    delete from tb_member_exchange_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rtmap.twobean.entity.MemberExchangeRecord"  >
+    insert into tb_member_exchange_record (id, member_username, member_sid, 
+      product_id, market_sid, score, 
+      consignee, contact, shipping_address, 
+      transaction_status, exchange_time, write_off_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{memberUsername,jdbcType=VARCHAR}, #{memberSid,jdbcType=BIGINT}, 
+      #{productId,jdbcType=INTEGER}, #{marketSid,jdbcType=BIGINT}, #{score,jdbcType=INTEGER}, 
+      #{consignee,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{shippingAddress,jdbcType=VARCHAR}, 
+      #{transactionStatus,jdbcType=VARCHAR}, #{exchangeTime,jdbcType=VARCHAR}, #{writeOffTime,jdbcType=VARCHAR}
+      )    
+  </insert>
+  <insert id="insertSelective" parameterType="com.rtmap.twobean.entity.MemberExchangeRecord" keyProperty="id">
+    insert into tb_member_exchange_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberUsername != null" >
+        member_username,
+      </if>
+      <if test="memberSid != null" >
+        member_sid,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="marketSid != null" >
+        market_sid,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="consignee != null" >
+        consignee,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="shippingAddress != null" >
+        shipping_address,
+      </if>
+      <if test="transactionStatus != null" >
+        transaction_status,
+      </if>
+      <if test="exchangeTime != null" >
+        exchange_time,
+      </if>
+      <if test="writeOffTime != null" >
+        write_off_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="memberUsername != null" >
+        #{memberUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSid != null" >
+        #{memberSid,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="marketSid != null" >
+        #{marketSid,jdbcType=BIGINT},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingAddress != null" >
+        #{shippingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionStatus != null" >
+        #{transactionStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeTime != null" >
+        #{exchangeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="writeOffTime != null" >
+        #{writeOffTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+  </insert>
+  <select id="countByExample" parameterType="com.rtmap.twobean.entity.MemberExchangeRecordExample" resultType="java.lang.Integer" >
+    select count(*) from tb_member_exchange_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_member_exchange_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberUsername != null" >
+        member_username = #{record.memberUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberSid != null" >
+        member_sid = #{record.memberSid,jdbcType=BIGINT},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=INTEGER},
+      </if>
+      <if test="record.marketSid != null" >
+        market_sid = #{record.marketSid,jdbcType=BIGINT},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.consignee != null" >
+        consignee = #{record.consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contact != null" >
+        contact = #{record.contact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingAddress != null" >
+        shipping_address = #{record.shippingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transactionStatus != null" >
+        transaction_status = #{record.transactionStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exchangeTime != null" >
+        exchange_time = #{record.exchangeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.writeOffTime != null" >
+        write_off_time = #{record.writeOffTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_member_exchange_record
+    set id = #{record.id,jdbcType=INTEGER},
+      member_username = #{record.memberUsername,jdbcType=VARCHAR},
+      member_sid = #{record.memberSid,jdbcType=BIGINT},
+      product_id = #{record.productId,jdbcType=INTEGER},
+      market_sid = #{record.marketSid,jdbcType=BIGINT},
+      score = #{record.score,jdbcType=INTEGER},
+      consignee = #{record.consignee,jdbcType=VARCHAR},
+      contact = #{record.contact,jdbcType=VARCHAR},
+      shipping_address = #{record.shippingAddress,jdbcType=VARCHAR},
+      transaction_status = #{record.transactionStatus,jdbcType=VARCHAR},
+      exchange_time = #{record.exchangeTime,jdbcType=VARCHAR},
+      write_off_time = #{record.writeOffTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rtmap.twobean.entity.MemberExchangeRecord" >
+    update tb_member_exchange_record
+    <set >
+      <if test="memberUsername != null" >
+        member_username = #{memberUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSid != null" >
+        member_sid = #{memberSid,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="marketSid != null" >
+        market_sid = #{marketSid,jdbcType=BIGINT},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="consignee != null" >
+        consignee = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingAddress != null" >
+        shipping_address = #{shippingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionStatus != null" >
+        transaction_status = #{transactionStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeTime != null" >
+        exchange_time = #{exchangeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="writeOffTime != null" >
+        write_off_time = #{writeOffTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rtmap.twobean.entity.MemberExchangeRecord" >
+    update tb_member_exchange_record
+    set member_username = #{memberUsername,jdbcType=VARCHAR},
+      member_sid = #{memberSid,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=INTEGER},
+      market_sid = #{marketSid,jdbcType=BIGINT},
+      score = #{score,jdbcType=INTEGER},
+      consignee = #{consignee,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      shipping_address = #{shippingAddress,jdbcType=VARCHAR},
+      transaction_status = #{transactionStatus,jdbcType=VARCHAR},
+      exchange_time = #{exchangeTime,jdbcType=VARCHAR},
+      write_off_time = #{writeOffTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

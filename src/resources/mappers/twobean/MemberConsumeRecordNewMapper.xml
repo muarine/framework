@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rtmap.twobean.dao.MemberConsumeRecordNewMapper" >
+  <resultMap id="BaseResultMap" type="com.rtmap.twobean.entity.MemberConsumeRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="member_sid" property="memberSid" jdbcType="BIGINT" />
+    <result column="market_sid" property="marketSid" jdbcType="BIGINT" />
+    <result column="market_name" property="marketName" jdbcType="VARCHAR" />
+    <result column="shop_sid" property="shopSid" jdbcType="BIGINT" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="shop_floor" property="shopFloor" jdbcType="VARCHAR" />
+    <result column="shop_floor_num" property="shopFloorNum" jdbcType="VARCHAR" />
+    <result column="delivery_code" property="deliveryCode" jdbcType="VARCHAR" />
+    <result column="transaction_id" property="transactionId" jdbcType="VARCHAR" />
+    <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+    <result column="kechuan_no" property="kechuanNo" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="INTEGER" />
+    <result column="payment_time" property="paymentTime" jdbcType="VARCHAR" />
+    <result column="return_time" property="returnTime" jdbcType="VARCHAR" />
+    <result column="product_num" property="productNum" jdbcType="INTEGER" />
+    <result column="product" property="product" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="add_time" property="addTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, member_sid, market_sid, market_name, shop_sid, shop_name, shop_floor, shop_floor_num, 
+    delivery_code, transaction_id, out_trade_no, kechuan_no, open_id, appid, money, payment_time, 
+    return_time, product_num, product, status, user_id, add_time
+  </sql>
+  <select id="getMemberConsumeRecordList" resultMap="BaseResultMap" parameterType="map">
+    SELECT * FROM tb_member_consume_record     
+    WHERE (status = 1 AND shop_sid = #{shopId}) or 
+    (status &gt;=2 AND status &lt;= 3 AND shop_sid = #{shopId}
+    <if test="userId != null">
+    	AND user_id = #{userId}
+    </if>
+    )    
+    ORDER BY STATUS ASC,payment_time DESC 
+    <if test="start != null and pageSize != null">
+		limit #{start}, #{pageSize}
+	</if>
+  </select>
+</mapper>
