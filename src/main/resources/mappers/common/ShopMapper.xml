@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rtmap.common.dao.ShopMapper" >
+	<select id="selectById" resultType="com.rtmap.common.entity.Shop" parameterType="long">
+		select
+			id,market_id as marketId ,name,description,logo,status,create_time as createTime
+		from
+			u_shop
+		where
+			id = #{id}
+	</select>
+</mapper>
