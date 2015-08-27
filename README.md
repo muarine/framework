@@ -1,6 +1,7 @@
 项目名称：SpringMVC4.1.7 Rest + Mybatis3.0.0
 
 项目主要规范：
+
 1. 按照模块给package命名
 
 2. rest controller只提供返json的api ,业务逻辑Coding在Service层
