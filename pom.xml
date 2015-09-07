@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.muarine.demo</groupId>
-  <artifactId>demo</artifactId>
+  <groupId>com.muarine.framework</groupId>
+  <artifactId>framework</artifactId>
   <name>xunlu</name>
   <packaging>war</packaging>
   <version>1.0.0</version>
-  <description>demo</description>
+  <description>framework</description>
   <url>http://www.muarine.com</url>
   		
 	<properties>
