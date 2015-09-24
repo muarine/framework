@@ -1,51 +1,48 @@
+/* 
+ * RT MAP, Home of Professional MAP 
+ * Copyright 2015 Bit Main Inc. and/or its affiliates and other contributors
+ * as indicated by the @author tags. All rights reserved.
+ * See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
+ */
 package com.muarine.common.vo;
 
-
+/**
+ * Result.
+ * 
+ * @author Muarine maoyun@rtmap.com
+ * @date 2015年7月8日
+ * @since 2.0
+ */
 public class Result {
-
-	/**
-	 * 
-	 */
-	private String rstcode;//请求成功200  请求失败400 签名验证失败300
-	private String rsttext;
-	private Object obj;
-	private int total = 0;
 	
-	public String getRstcode() {
-		return rstcode;
+	private String errcode;
+	private String errmsg;
+	private Object obj;
+	private int total = 1;
+	
+	public String getErrcode() {
+		return errcode;
 	}
-	public void setRstcode(String rstcode) {
-		this.rstcode = rstcode;
+	public void setErrcode(String errcode) {
+		this.errcode = errcode;
 	}
-	public String getRsttext() {
-		return rsttext;
+	public String getErrmsg() {
+		return errmsg;
 	}
-	public void setRsttext(String rsttext) {
-		this.rsttext = rsttext;
+	public void setErrmsg(String errmsg) {
+		this.errmsg = errmsg;
 	}
-	/**
-	 * @return the obj
-	 */
 	public Object getObj() {
 		return obj;
 	}
-	/**
-	 * @param obj the obj to set
-	 */
 	public void setObj(Object obj) {
 		this.obj = obj;
 	}
-	/**
-	 * @return the total
-	 */
 	public int getTotal() {
 		return total;
 	}
-	/**
-	 * @param total the total to set
-	 */
 	public void setTotal(int total) {
 		this.total = total;
 	}
-	
 }

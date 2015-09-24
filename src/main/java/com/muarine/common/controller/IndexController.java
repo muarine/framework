@@ -7,6 +7,7 @@
  */
 package com.muarine.common.controller;
 
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,7 @@ import com.muarine.common.vo.Result;
  * @date 2015年7月6日
  * @since 2.0
  */
+@ControllerAdvice
 @RestController
 @RequestMapping("/")
 public class IndexController extends BaseController{
@@ -27,8 +29,8 @@ public class IndexController extends BaseController{
 	@RequestMapping(value = "/signerror")
 	public Result signError(){
 		Result result = new Result();
-		result.setRstcode(Code.ERROR_SIGN);
-		result.setRsttext(codeMap.get(Code.ERROR_SIGN));
+		result.setErrcode(Code.ERROR_SIGN);
+		result.setErrmsg(codeMap.get(Code.ERROR_SIGN));
 		return result;
 	}
 	

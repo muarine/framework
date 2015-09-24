@@ -13,6 +13,7 @@
 		<junit.version>4.11</junit.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>2.2</log4j.version>
+		<aspectj.version>1.8.5</aspectj.version>
 
 		<spring.version>4.1.7.RELEASE</spring.version>
 		<mybatis.version>3.3.0</mybatis.version>
@@ -30,6 +31,7 @@
 		<commons.pool.version>1.5.5</commons.pool.version>
 		<joda.time.version>2.3</joda.time.version>
 		<spymemcached.version>2.11.7</spymemcached.version>
+		<mail.version>1.4.7</mail.version>
 
 	</properties>
   	
@@ -161,7 +163,17 @@
 			<artifactId>commons-lang</artifactId>
 			<version>${commons.lang.version}</version>
 		</dependency>
- 	
+ 		<!-- AspectJ dependencies -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+  		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
 		<!-- javaee -->
   		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -193,6 +205,11 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>${joda.time.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${mail.version}</version>
 		</dependency>
 		</dependencies>
 		

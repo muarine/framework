@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
 
 /**
  * BaseController.
@@ -19,9 +20,18 @@ import org.slf4j.LoggerFactory;
  * @date 2015年6月30日
  * @since 2.0
  */
-public class BaseController{
+public class BaseController extends AbstractJsonpResponseBodyAdvice{
 	 
 	protected Logger log = LoggerFactory.getLogger(BaseController.class);
+	
+	/**
+	 * Create a new BaseController.
+	 * 
+	 * @param queryParamNames
+	 */
+	public BaseController(String... queryParamNames) {
+		super("callback");
+	}
 	
 	/**
 	 * 全局返回码

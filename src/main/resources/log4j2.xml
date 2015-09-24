@@ -40,7 +40,7 @@
 		    <Logger name="KECHUAN_FILE" level="ERROR" additivity="false">
 		      <appender-ref ref="KECHUAN_FILE"/>
 		    </Logger>
-			<Root level="DEBUG">
+			<Root level="INFO">
 				<AppenderRef ref="Console" />
 				<AppenderRef ref="RollingRandomAccessFile" />
 			</Root>
