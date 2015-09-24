@@ -8,10 +8,10 @@
 package com.muarine.common.constants;
 
 /**
+ * 
  * Code. 返回码
  * 
- * @author Muarine maoyun@rtmap.com
- * @date 2015年6月29日
+ * @author muarine maoyun@rtmap.com
  * @since 0.1
  */
 public class Code {
@@ -40,6 +40,22 @@ public class Code {
 	 * <全局>服务器异常
 	 */
 	public static final String ERROR = "500";
+	/**
+	 * <全局>无效的参数
+	 */
+	public static final String INVAILD_PARAM = "401";
 	
+	/**
+	 * 无效的username和secret
+	 */
+	public static final String AT_INVALID = "40001";
+	/**
+	 * access_token无效
+	 */
+	public static final String AT_EXPIRE = "40002";
+	/**
+	 * <权限>没有权限
+	 */
+	public static final String PM_NONE = "40003";
 	
 }

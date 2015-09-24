@@ -1,5 +1,6 @@
-package com.muarine.common.entity;
+package com.muarine.common.vo;
 
+import com.muarine.common.entity.BaseEntity;
 
 /**
  * 

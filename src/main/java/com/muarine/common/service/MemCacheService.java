@@ -48,6 +48,32 @@ public class MemCacheService {
 	}
 	
 	/**
+	 * 
+	 * 获取后台用户的access_token
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public String getUserInfoAndPermission(String access_token){
+		Object obj = memcachedClient.get(access_token);
+		return obj == null ? null : String.valueOf(obj);
+	}
+	
+	/**
+	 * 
+	 * 设置后台用户信息-权限列表
+	 * key:accessToken
+	 * value:用户相关的json
+	 *
+	 */
+	public void setUserInfoAndPermission(String key , String value){
+		// key：201508041722559_49ca095e98040c62657b67d5e26a7fe1
+		// exp:秒
+		// value:json
+		memcachedClient.set(key, 3600*24*30, value);
+	}
+	
+	/**
 	 * 获取异常记录次数
 	 * 
 	 * @param api
