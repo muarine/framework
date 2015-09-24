@@ -12,10 +12,14 @@
 
 
 	<!-- 默认的注解映射的支持 -->  
-	<context:component-scan base-package="com.rtmap.*.controller,com.rtmap.*.service" />
+	<context:component-scan base-package="com.muarine.*.controller,com.muarine.*.service" />
 	
+   	<context:annotation-config />
    	<mvc:annotation-driven />
-   	
+	<mvc:default-servlet-handler />
+	
+	<mvc:view-controller path="/" view-name="index"/>
+		
 	<context:property-placeholder location="classpath:system.properties" />
 	
 	
@@ -56,18 +60,18 @@
 			<list>
 				<!-- json -->
 				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
-				<!-- xml -->
-				<bean name="jaxb2MarshallingView" class="org.springframework.web.servlet.view.xml.MarshallingView">
+				<!-- 此处XML自动转换有错误 	Unable to locate object to be marshalled in model	 -->
+				<!-- <bean name="jaxb2MarshallingView" class="org.springframework.web.servlet.view.xml.MarshallingView">
 				    <constructor-arg>
 				        <bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
 				            <property name="packagesToScan">
 				                <array>
-				                    <value>com.rtmap.common.domain</value>
+				                    <value>com.muarine.weixin.domain</value>
 				                </array>
 				            </property>
 				        </bean>
 				    </constructor-arg>
-				</bean>
+				</bean> -->
 			</list>
 		</property>
 	</bean>
@@ -94,15 +98,20 @@
 
 	
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
-
- 	<!-- 拦截器 -->  
-    <mvc:interceptors> 
-        <!-- 多个拦截器,顺序执行 -->    
-        <!-- 签名拦截器 -->   
-        <mvc:interceptor>
-            <mvc:mapping path="/twobean/**"/>
-            <bean id="signInterceptor" class="com.rtmap.common.interceptor.SignInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors> 
+	<!-- 如果拦截器是全局的,必须先对/resrouce路径过滤 -->
+	<!-- 自动过滤WEB根目录下的资源文件 		访问路径：/resrouce/js/	-->
+	<!-- <mvc:resources location="/" mapping="/resrouce/**" /> -->
+	
+	<mvc:interceptors> 
+		<mvc:interceptor> 
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/admin/login"/>
+			<mvc:exclude-mapping path="/js/**"/>
+			<mvc:exclude-mapping path="/css/**"/>
+			<mvc:exclude-mapping path="/images/**"/>
+			
+			<bean id="tokenInterceptor" class="com.muarine.common.aop.AccessTokenIntercepter"></bean> 
+		</mvc:interceptor> 
+	</mvc:interceptors>
 
 </beans>
