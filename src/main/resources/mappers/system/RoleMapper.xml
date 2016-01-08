@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.rtmap.api.mapper.RoleMapper" >
+<mapper namespace="com.muarine.common.mapper.RoleMapper" >
 	
-	<select id="selectById" parameterType="Long" resultType="com.rtmap.api.domain.Role">
+	<select id="selectById" parameterType="Long" resultType="com.muarine.common.entity.Role">
 		select * from u_role where id = #{id}
 	</select>
 	
-	<insert id="insert" parameterType="com.rtmap.api.domain.Role" keyProperty="id">
+	<insert id="insert" parameterType="com.muarine.common.entity.Role" keyProperty="id">
 		insert into u_role
 	    <trim prefix="(" suffix=")" suffixOverrides="," >
 	      <if test="id != null" >
@@ -41,7 +41,7 @@
 		 </selectKey>
 	</insert>
 	
-	<update id="update" parameterType="com.rtmap.api.domain.Role">
+	<update id="update" parameterType="com.muarine.common.entity.Role">
 		update u_role
     	<set >
     		<if test="name != null" >

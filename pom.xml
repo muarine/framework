@@ -44,7 +44,11 @@
 			<version>${junit.version}</version>
 			<scope>provided</scope>
 		</dependency>
-  		
+  		<dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>${commons.logging.version}</version>
+        </dependency>
   		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

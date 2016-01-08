@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.rtmap.core.mapper.LogApiMapper" >
+<mapper namespace="com.muarine.common.mapper.LogApiMapper" >
 	
-	<select id="select" resultType="com.rtmap.core.domain.LogApi">
+	<select id="select" resultType="com.muarine.common.entity.LogApi">
 		select 
 			`id`, `api`, `action`, `method`,`ip`, `running_time`, `create_time` 
 		from 
@@ -10,7 +10,7 @@
 		order by id desc 
 	</select>
 	
-	<insert id="insert" parameterType="com.rtmap.core.domain.LogApi">
+	<insert id="insert" parameterType="com.muarine.common.entity.LogApi">
 		insert into system_api_log
 	    <trim prefix="(" suffix=")" suffixOverrides="," >
 	      <if test="id != null" >

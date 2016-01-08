@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.rtmap.api.mapper.UserMapper" >
+<mapper namespace="com.muarine.common.mapper.UserMapper" >
 	
-	<select id="selectById" parameterType="Long" resultType="com.rtmap.api.domain.User">
+	<select id="selectById" parameterType="Long" resultType="com.muarine.common.entity.User">
 		select * from u_user where id = #{id}
 	</select>
-  <select id="selectByMap" parameterType="Map"  resultType="com.rtmap.api.domain.User">
+  <select id="selectByMap" parameterType="Map"  resultType="com.muarine.common.entity.User">
   	select 
   		* 
   	from 
@@ -23,7 +23,7 @@
   </select>
 	
 	
-	<insert id="insert" parameterType="com.rtmap.api.domain.User" keyProperty="id">
+	<insert id="insert" parameterType="com.muarine.common.entity.User" keyProperty="id">
 		insert into u_user
 	    <trim prefix="(" suffix=")" suffixOverrides="," >
 	      <if test="id != null" >
@@ -73,7 +73,7 @@
 		 </selectKey>
 	</insert>
 	
-	<update id="update" parameterType="com.rtmap.api.domain.User">
+	<update id="update" parameterType="com.muarine.common.entity.User">
 		update u_user
     	<set >
     		<if test="id != null" >

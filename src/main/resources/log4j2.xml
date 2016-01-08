@@ -17,7 +17,7 @@
 		</Appenders>
         <!-- 日志输出级别 -->
         <Loggers>
-			<Root level="INFO">
+			<Root level="DEBUG">
 				<AppenderRef ref="Console" />
 				<AppenderRef ref="RollingRandomAccessFile" />
 			</Root>

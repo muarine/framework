@@ -14,6 +14,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import freemarker.cache.ClassTemplateLoader;
@@ -28,6 +29,7 @@ import freemarker.template.Template;
  * @date 2015年8月14日
  * @since 2.0
  */
+@Service
 public class TemplateMail {
 	
 	private JavaMailSender sender;

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.rtmap.api.mapper.MenuMapper" >
+<mapper namespace="com.muarine.common.mapper.MenuMapper" >
 	
-	<select id="selectById" parameterType="Long" resultType="com.rtmap.api.domain.Menu">
+	<select id="selectById" parameterType="Long" resultType="com.muarine.common.entity.Menu">
 		select * from u_menu where id = #{id}
 	</select>
 	
-	<select id="selectByHref" parameterType="String" resultType="com.rtmap.api.domain.Menu">
+	<select id="selectByHref" parameterType="String" resultType="com.muarine.common.entity.Menu">
 		select 
 			*
 		from 
@@ -14,7 +14,7 @@
 		where 
 			href = #{href}
 	</select>
-	<select id="selectByAction" parameterType="String" resultType="com.rtmap.api.domain.Menu">
+	<select id="selectByAction" parameterType="String" resultType="com.muarine.common.entity.Menu">
 		select 
 			*
 		from 
@@ -35,7 +35,7 @@
 	</select>
 	
 	
-	<insert id="insert" parameterType="com.rtmap.api.domain.Menu" keyProperty="id">
+	<insert id="insert" parameterType="com.muarine.common.entity.Menu" keyProperty="id">
 		insert into u_menu
 	    <trim prefix="(" suffix=")" suffixOverrides="," >
 	      <if test="id != null" >
@@ -124,7 +124,7 @@
 		 </selectKey>
 	</insert>
 	
-	<update id="update" parameterType="com.rtmap.api.domain.Menu">
+	<update id="update" parameterType="com.muarine.common.entity.Menu">
 		update u_menu
     	<set >
     		<if test="name != null" >

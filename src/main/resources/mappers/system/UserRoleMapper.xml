@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.rtmap.api.mapper.UserRoleMapper" >
+<mapper namespace="com.muarine.common.entity.UserRole" >
 	
 	<sql id="AllColumns">
 		`id`, `role_id`, `user_id`, `modify_time`
 	</sql>
 	
-	<select id="selectByRoleId" resultType="com.rtmap.api.mapper.UserRoleMapper" parameterType="Long">
+	<select id="selectByRoleId" resultType="com.muarine.common.entity.UserRole" parameterType="Long">
 		select
 			<include refid="AllColumns"></include>
 		from
@@ -15,7 +15,7 @@
 			role_id = #{role_id}
 	</select>
 	
-	<select id="selectByUserId" resultType="com.rtmap.api.mapper.UserRoleMapper" parameterType="Long">
+	<select id="selectByUserId" resultType="com.muarine.common.entity.UserRole" parameterType="Long">
 		select
 			<include refid="AllColumns"></include>
 		from
@@ -24,7 +24,7 @@
 			user_id = #{user_id}
 	</select>
 	
-	<insert id="insert" parameterType="com.rtmap.api.mapper.UserRoleMapper" keyProperty="id">
+	<insert id="insert" parameterType="com.muarine.common.entity.UserRole" keyProperty="id">
 		insert into u_user_role
 		<trim prefix="(" suffix=")" suffixOverrides="," >
 	      <if test="id != null" >

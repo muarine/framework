@@ -41,15 +41,6 @@ public class AccessTokenIntercepter extends HandlerInterceptorAdapter {
 	private Logger log = LoggerFactory.getLogger(AccessTokenIntercepter.class);
 	
 	private Map<String,String> codeMap;
-	private PermissionService permissionService;
-	
-	public void setCodeMap(Map<String, String> codeMap) {
-		this.codeMap = codeMap;
-	}
-
-	public void setPermissionService(PermissionService permissionService) {
-		this.permissionService = permissionService;
-	}
 
 	/**
 	 * 拦截器
@@ -75,7 +66,7 @@ public class AccessTokenIntercepter extends HandlerInterceptorAdapter {
 					
 					channel.setAccessToken(access_token);
 					
-					permissionService.checkPermission(channel);
+//					permissionService.checkPermission(channel);
 					
 					
 				} catch (ResultException e) {
@@ -120,7 +111,6 @@ public class AccessTokenIntercepter extends HandlerInterceptorAdapter {
 		AccessRequired actionAccess = method.getDeclaringClass().getAnnotation(AccessRequired.class);
 		// Method中请求url
 		String methodRequestMapping = method.getAnnotation(RequestMapping.class).value()[0];
-		System.out.println();
 		System.out.println();
 		System.out.println(actionRequestMapping);
 		System.out.println(methodRequestMapping);

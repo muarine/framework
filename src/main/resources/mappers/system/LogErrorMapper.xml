@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.rtmap.core.mapper.LogErrorMapper" >
+<mapper namespace="com.muarine.common.mapper.LogErrorMapper" >
 	
-	<select id="select" resultType="com.rtmap.core.domain.LogError">
+	<select id="select" resultType="com.muarine.common.entity.LogError">
 		select `id`, `api`, `message`, `create_time`
 		from system_error_log
 		order by id desc 
 	</select>
 	
-	<insert id="insert" parameterType="com.rtmap.core.domain.LogError" >
+	<insert id="insert" parameterType="com.muarine.common.entity.LogError" >
 		insert into system_error_log
 	    <trim prefix="(" suffix=")" suffixOverrides="," >
 	      <if test="id != null" >
