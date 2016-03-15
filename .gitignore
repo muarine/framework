@@ -5,3 +5,4 @@
 
 /${sys:catalina.base}/
 /.externalToolBuilders/
+/.DS_Store
