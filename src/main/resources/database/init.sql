@@ -282,4 +282,23 @@ CREATE TABLE `u_user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+
+-- ----------------------------
+--  Table structure for `wx_mp_news`
+-- ----------------------------
+DROP TABLE IF EXISTS `wx_mp_news`;
+CREATE TABLE `wx_mp_news` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `parent_id` bigint(20) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `pic_url` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `content` text,
+  `create_time` datetime DEFAULT NULL,
+  `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='图文素材';
+
+
 -- Dump completed on 2015-09-24 17:01:28
